@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: ba-express-local
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: ba_express_local
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql:ro
+
+  
+
+volumes:
+  pgdata:
