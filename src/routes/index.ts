@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import authRoutes from './auth.routes';
+import userRoutes from './user.routes';
 
 /**
  * Rotas principais da API
@@ -8,6 +9,9 @@ const router = Router();
 
 // Rotas de autenticação
 router.use('/auth', authRoutes);
+
+// Rotas de gerenciamento de usuários
+router.use('/users', userRoutes);
 
 // Rota de health check
 router.get('/health', (req, res) => {

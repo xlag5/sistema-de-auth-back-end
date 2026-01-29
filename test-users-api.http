@@ -1,0 +1,95 @@
+### Exemplos de requisições para o CRUD de Usuários
+### Todas as rotas requerem autenticação (Bearer Token)
+
+@baseUrl = http://localhost:3000/api
+@token = seu_token_jwt_aqui
+
+### 1. Listar todos os usuários (com paginação)
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+### 2. Listar usuários com filtros
+GET {{baseUrl}}/users?name=João&active=true&page=1&pageSize=10
+Authorization: Bearer {{token}}
+
+### 3. Buscar usuário por ID
+GET {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+
+### 4. Criar novo usuário
+POST {{baseUrl}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "João",
+  "last_name": "Silva",
+  "email": "joao.silva@example.com",
+  "senha": "Senha123",
+  "date_of_birth": "1990-01-15",
+  "active": true
+}
+
+### 5. Atualizar usuário
+PUT {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "João Pedro",
+  "last_name": "Silva Santos",
+  "email": "joao.pedro@example.com",
+  "active": true
+}
+
+### 6. Atualizar apenas o nome
+PUT {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "João Carlos"
+}
+
+### 7. Atualizar senha do usuário (apenas sua própria senha)
+PATCH {{baseUrl}}/users/1/password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "senha_atual": "Senha123",
+  "senha_nova": "NovaSenha456"
+}
+
+### 8. Desativar usuário (soft delete)
+DELETE {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+
+### 9. Reativar usuário
+PATCH {{baseUrl}}/users/1/activate
+Authorization: Bearer {{token}}
+
+### 10. Deletar permanentemente um usuário (use com cuidado!)
+DELETE {{baseUrl}}/users/1/permanent
+Authorization: Bearer {{token}}
+
+### 11. Listar apenas usuários ativos
+GET {{baseUrl}}/users?active=true
+Authorization: Bearer {{token}}
+
+### 12. Listar apenas usuários inativos
+GET {{baseUrl}}/users?active=false
+Authorization: Bearer {{token}}
+
+### 13. Buscar usuários por email
+GET {{baseUrl}}/users?email=joao
+Authorization: Bearer {{token}}
+
+### 14. Buscar usuários por nome
+GET {{baseUrl}}/users?name=Silva
+Authorization: Bearer {{token}}
+
+### 15. Paginação - segunda página com 20 itens por página
+GET {{baseUrl}}/users?page=2&pageSize=20
+Authorization: Bearer {{token}}
+
