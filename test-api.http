@@ -1,0 +1,62 @@
+### Arquivo para testar a API
+### Use a extensão REST Client do VSCode
+
+@baseUrl = http://localhost:3000/api
+@token = SEU_TOKEN_AQUI
+
+### Health Check
+GET {{baseUrl}}/health
+
+### Registrar novo usuário
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "João",
+  "last_name": "Silva",
+  "email": "joao@email.com",
+  "senha": "SenhaForte123",
+  "date_of_birth": "1990-01-15"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "joao@email.com",
+  "senha": "SenhaForte123"
+}
+
+### Obter dados do usuário autenticado (requer token)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
+
+### Verificar se email existe
+POST {{baseUrl}}/auth/check-email
+Content-Type: application/json
+
+{
+  "email": "joao@email.com"
+}
+
+### Teste de validação - Email inválido
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "email-invalido",
+  "senha": "SenhaForte123"
+}
+
+### Teste de validação - Senha fraca
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Maria",
+  "last_name": "Santos",
+  "email": "maria@email.com",
+  "senha": "123"
+}
+

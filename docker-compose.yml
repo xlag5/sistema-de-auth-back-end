@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: sistema_auth
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: sistema_auth
+    ports:
+      - "5340:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Descomente as linhas abaixo quando criar os arquivos de inicialização
+      # - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+      # - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql:ro
+
+  
+
+volumes:
+  pgdata:
